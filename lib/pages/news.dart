@@ -10,6 +10,8 @@ class News extends StatefulWidget {
 class _NewsState extends State<News> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Text('Кто прочитал тот лох'),
+    );
   }
 }
