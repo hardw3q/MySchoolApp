@@ -14,7 +14,7 @@ class Root extends StatefulWidget {
 
 class _RootState extends State<Root> {
   int _selectedIndex = 0;
-  final wiget = [News(),Messanger(), HashTag(), Profile()];
+  final wiget = [HashTag(),News(), Messanger(), Profile()];
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -27,15 +27,12 @@ class _RootState extends State<Root> {
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
-            topRight: Radius.circular(30), topLeft: Radius.circular(30)),
-            boxShadow: [
-              BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10)
-            ],
+            topRight: Radius.circular(35), topLeft: Radius.circular(35)),
           ),
         child: ClipRRect(
           borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(30.0),
-            topRight: Radius.circular(30.0),
+            topLeft: Radius.circular(35.0),
+            topRight: Radius.circular(35.0),
           ),
           child: BottomNavigationBar(
             currentIndex: _selectedIndex,
