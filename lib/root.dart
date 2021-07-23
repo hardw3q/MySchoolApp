@@ -39,28 +39,36 @@ class _RootState extends State<Root> {
           ),
           child: BottomNavigationBar(
             currentIndex: _selectedIndex,
-            selectedItemColor: Colors.white,
+            //selectedItemColor: Colors.white,
+            selectedIconTheme: IconThemeData(
+              size: 40
+            ),
+            unselectedIconTheme: IconThemeData(
+              size: 30
+            ),
             onTap: _onItemTapped,
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.white,
             backgroundColor: Color(0xff8A8181),
             type: BottomNavigationBarType.fixed,
             showSelectedLabels: false,
             showUnselectedLabels: false,
-            unselectedItemColor: Colors.white60,
-            items: const <BottomNavigationBarItem>[
+            //unselectedItemColor: Colors.white60,
+            items:  const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(Icons.amp_stories_sharp),
+                icon: ImageIcon(AssetImage("assets/Hashtag.png"),),
                 title: Text('Hashtag'),
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.fiber_new),
+                icon: ImageIcon(AssetImage('assets/News.png')),
                 title: Text('News'),
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.message_outlined),
+                icon: ImageIcon(AssetImage('assets/Chat.png')),
                 title: Text('Messages'),
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.people_rounded),
+                icon: ImageIcon(AssetImage('assets/Name.png')),
                 title: Text('Profile'),
               ),
             ],
