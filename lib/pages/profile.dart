@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../bottom_nav_bar.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -16,9 +15,8 @@ class _ProfileState extends State<Profile> {
     return
       Scaffold(
         extendBody: true,
-        bottomNavigationBar: NavigationBar(),
-        body: Container(
-
+        body: Center(
+          child: Text('This is profile'),
         ),
       );
   }

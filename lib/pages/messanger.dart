@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../bottom_nav_bar.dart';
 
 class Messanger extends StatefulWidget {
   const Messanger({Key? key}) : super(key: key);
@@ -16,9 +15,8 @@ class _MessangerState extends State<Messanger> {
     return
       Scaffold(
         extendBody: true,
-        bottomNavigationBar: NavigationBar(),
-        body: Container(
-
+        body: Center(
+          child: Text('This is messanger'),
         ),
       );
   }

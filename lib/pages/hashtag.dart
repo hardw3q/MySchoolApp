@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../bottom_nav_bar.dart';
 
 class HashTag extends StatefulWidget {
   const HashTag({Key? key}) : super(key: key);
@@ -16,9 +15,8 @@ class _HashState extends State<HashTag> {
     return
       Scaffold(
         extendBody: true,
-        bottomNavigationBar: NavigationBar(),
-        body: Container(
-
+        body: Center(
+          child: Text('This is hashtag'),
         ),
       );
   }
