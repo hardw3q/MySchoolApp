@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "70202731866",
+    "project_id": "myschoolapp-79a79",
+    "storage_bucket": "myschoolapp-79a79.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:70202731866:android:9c4fed9fdf6f35521b5763",
+        "android_client_info": {
+          "package_name": "com.kikimore.myschoolapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "70202731866-iadqino8srj17vu9eqvg9br6ckg2siia.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMgQmWsaxNF7RT5KITjsla8l70o4BAQ0k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "70202731866-iadqino8srj17vu9eqvg9br6ckg2siia.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

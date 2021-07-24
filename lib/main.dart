@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myschoolapp/pages/login.dart';
 import 'package:myschoolapp/root.dart';
 import 'package:myschoolapp/pages/hashtag.dart';
 import 'package:myschoolapp/pages/messanger.dart';
@@ -13,10 +14,11 @@ void main() {
     initialRoute: '/',
     routes: {
       '/': (context) => Root(),
-
+      '/login': (context) => Login(),
       '/hashtag': (context) => HashTag(),
       '/messanger': (context) => Messanger(),
       '/profile': (context) => Profile()
     },
   ));
 }
+

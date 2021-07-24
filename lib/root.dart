@@ -1,10 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:myschoolapp/pages/hashtag.dart';
 import 'package:myschoolapp/pages/messanger.dart';
 import 'package:myschoolapp/pages/news.dart';
 import 'package:myschoolapp/pages/profile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class Root extends StatefulWidget {
   const Root({Key? key}) : super(key: key);
@@ -19,6 +23,23 @@ class _RootState extends State<Root> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+  void initFirebase(){
+    Firebase.initializeApp().catchError((error, stacktrace){
+      Navigator.pushNamed(context, '/login');
+    }).whenComplete((){
+      FirebaseAuth auth = FirebaseAuth.instance;
+      auth.authStateChanges().listen((User? user) {
+        if(user == null){
+          Navigator.pushNamed(context, '/login');
+        }
+      });
+    });
+  }
+  @override
+  void initState() {
+    super.initState();
+    initFirebase();
   }
   @override
   Widget build(BuildContext context) {
