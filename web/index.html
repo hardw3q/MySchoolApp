@@ -30,9 +30,27 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
-<center>
-  <img src="https://sun9-45.userapi.com/impf/c855416/v855416641/d0504/G6umWYRYbCk.jpg?size=809x1080&quality=96&sign=f49ebee0675b9a72786c550c2cdf323a&type=album"/>
-</center>
+  <div style="width: 200px;
+              height: 200px;
+              position: absolute;
+              margin: 0;
+                top: 50%;
+                left: 50%;
+                margin-right: -50%;
+                transform: translate(-50%, -50%)">
+    <img src="icons/splashscreenlogo.svg" align="center" style="width: 100%;
+                                              height: 100%;
+                                              position: absolute;
+                                              top: 0;
+                                              left: 0;
+                                              opacity: .6;"/>
+    <img src="icons/logo.png" align="center" style="width: 47%;
+                                     height: 47%;
+                                     position: absolute;
+                                     top: 53px;
+                                     left: 53px;"/>
+  </div>
+
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
