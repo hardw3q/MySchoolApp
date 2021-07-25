@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:myschoolapp/pages/hashtag.dart';
 import 'package:myschoolapp/pages/messanger.dart';
@@ -40,6 +41,10 @@ class _RootState extends State<Root> {
   void initState() {
     super.initState();
     initFirebase();
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ));
   }
   @override
   Widget build(BuildContext context) {

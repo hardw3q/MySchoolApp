@@ -8,6 +8,7 @@ import 'package:myschoolapp/pages/profile.dart';
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     theme: new ThemeData(
       primaryColor: Colors.grey
     ),
