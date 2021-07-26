@@ -32,7 +32,7 @@ class _RootState extends State<Root> {
       FirebaseAuth auth = FirebaseAuth.instance;
       auth.authStateChanges().listen((User? user) {
         if(user == null){
-          Navigator.pushNamed(context, '/login');
+          Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
         }
       });
     });

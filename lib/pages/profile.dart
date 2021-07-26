@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,19 @@ class _ProfileState extends State<Profile> {
       Scaffold(
         extendBody: true,
         body: Center(
-          child: Text('This is profile'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('This is profile, and your number id' + FirebaseAuth.instance.currentUser!.phoneNumber.toString()),
+              RaisedButton(onPressed: (){
+                setState(() {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+                });
+              },
+              child: Text('Выйти из аккаунта'),)
+            ],
+          )
         ),
       );
   }

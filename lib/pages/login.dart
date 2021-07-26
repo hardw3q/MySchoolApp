@@ -1,7 +1,9 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 
 class Login extends StatefulWidget {
@@ -14,90 +16,49 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   var smsCode = null;
   var phoneNumber = null;
-  void phoneAuth() async{
-    FirebaseAuth auth = FirebaseAuth.instance;
+  var buttonState = 0;
+  bool smsFieldEnabled = false;
+  bool phoneFieldEnabled = true;
+  String buttonText = 'Отправить SMS';
+  late ConfirmationResult confirmationResult;
 
-    ConfirmationResult confirmationResult = await auth.signInWithPhoneNumber(phoneNumber);
-    if(smsCode != null){
-      await confirmationResult.confirm(smsCode).whenComplete(() => Navigator.pop(context));
+  void phoneWebAuth() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    if (phoneNumber != null) {
+      confirmationResult =
+      await auth.signInWithPhoneNumber(phoneNumber, null).whenComplete(() {
+        setState(() {
+          buttonState = 1;
+          buttonText = 'Вход';
+          smsFieldEnabled = true;
+          phoneFieldEnabled = false;
+        });
+      });
+    }else{
+      Fluttertoast.showToast(
+          msg: 'Произошла ошибка при отправке кода ',
+          toastLength: Toast.LENGTH_SHORT);
     }
   }
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      child: Column(
-        children: [
-           const SizedBox(
-             height: 180,
-           ),
-           Stack(
-             children: [
-               Container(
-                 child: const Image(
-                   image: AssetImage('assets/login_ellipse.png'),
-                   height: 130,
-                   width: 130,
-                 ),
-               ),
-               Container(
-                 child: const Image(
-                   image: AssetImage('assets/login_logo.png'),
-                   height: 100,
-                   width: 100,
-                 ),
-                 margin: EdgeInsets.all(13.5),
-               )
-             ],
-           ),
-           const SizedBox(
-             height: 60,
-           ),
-           Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 25),
-            child:  TextField(obscureText: false,
-                  onChanged: (text){
-                    phoneNumber = text;
-                  },
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Номер телефона',
-                      labelStyle: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w300,
-                        color: Color(0xff807E7E),
-                        fontSize: 22,
-                      ),
-                  ),
-                ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 25),
-            child: TextField(obscureText: false,
-              onChanged: (text){
-                smsCode = text;
-              },
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Код из SMS',
-                labelStyle: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w300,
-                    color: Color(0xff807E7E),
-                    fontSize: 22
-                )
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          RaisedButton(
-              child: Text('Вход'),
-              onPressed:  (){
-                /*FirebaseAuth.instance.verifyPhoneNumber(
+
+  void confirmSmsCodeWeb() {
+    if (smsCode != null) {
+      confirmationResult.confirm(smsCode)
+          .whenComplete(() =>
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              '/', (Route<dynamic> route) => false))
+          .whenComplete(() {
+        buttonState == 0;
+        RecaptchaVerifier().clear();
+      });
+    }else{
+      Fluttertoast.showToast(
+          msg: 'Произошла ошибка при входе',
+          toastLength: Toast.LENGTH_SHORT);
+    }
+  }
+    void phoneAndroidAuth() async {
+      /*FirebaseAuth.instance.verifyPhoneNumber(
                   phoneNumber: phoneNumber,
                   //timeout: const Duration(seconds: 30),
                   verificationCompleted: (PhoneAuthCredential credential) {
@@ -113,10 +74,97 @@ class _LoginState extends State<Login> {
                   },
                   codeAutoRetrievalTimeout: (String verificationId) {},
                 );*/
-
-              }),
-        ],
-      ),
-    );
+    }
+    @override
+    Widget build(BuildContext context) {
+      return Material(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 160,
+            ),
+            Stack(
+              children: [
+                Container(
+                  child: const Image(
+                    image: AssetImage('assets/login_ellipse.png'),
+                    height: 130,
+                    width: 130,
+                  ),
+                ),
+                Container(
+                  child: const Image(
+                    image: AssetImage('assets/login_logo.png'),
+                    height: 100,
+                    width: 100,
+                  ),
+                  margin: EdgeInsets.all(13.5),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 7,
+            ),
+            Text('Моя Школа', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, fontFamily: 'Roboto')),
+            const SizedBox(
+              height: 60,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25),
+              child: TextField(obscureText: false,
+                enabled: phoneFieldEnabled,
+                onChanged: (text) {
+                  phoneNumber = text;
+                },
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Номер телефона',
+                  labelStyle: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w300,
+                    color: Color(0xff807E7E),
+                    fontSize: 22,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25),
+              child: TextField(obscureText: false,
+                enabled: smsFieldEnabled,
+                onChanged: (text) {
+                  smsCode = text;
+                },
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Код из SMS',
+                    labelStyle: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w300,
+                        color: Color(0xff807E7E),
+                        fontSize: 22
+                    )
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            RaisedButton(
+                child: Text(buttonText),
+                onPressed: () {
+                  if (buttonState == 0) {
+                    phoneWebAuth();
+                  } else {
+                    confirmSmsCodeWeb();
+                  }
+                },
+            ),
+          ],
+        ),
+      );
+    }
   }
-}
