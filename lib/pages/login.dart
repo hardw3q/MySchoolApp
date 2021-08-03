@@ -24,7 +24,7 @@ class _LoginState extends State<Login> {
 
   void phoneWebAuth() async {
     FirebaseAuth auth = FirebaseAuth.instance;
-    if (phoneNumber != null) {
+    if (phoneNumber != null && phoneNumber.length == 12) {
       confirmationResult =
       await auth.signInWithPhoneNumber(phoneNumber, null).whenComplete(() {
         setState(() {
@@ -42,14 +42,13 @@ class _LoginState extends State<Login> {
   }
 
   void confirmSmsCodeWeb() {
-    if (smsCode != null) {
+    if (smsCode != null && smsCode.length == 6) {
       confirmationResult.confirm(smsCode)
-          .whenComplete(() =>
+          .whenComplete((){
           Navigator.of(context).pushNamedAndRemoveUntil(
-              '/', (Route<dynamic> route) => false))
-          .whenComplete(() {
-        buttonState == 0;
-        RecaptchaVerifier().clear();
+              '/', (Route<dynamic> route) => false);
+          buttonState == 0;
+          RecaptchaVerifier().clear();
       });
     }else{
       Fluttertoast.showToast(

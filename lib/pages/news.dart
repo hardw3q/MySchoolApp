@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myschoolapp/elements/post.dart';
 
 class News extends StatefulWidget {
   const News({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class _NewsState extends State<News> {
       Scaffold(
         extendBody: true,
           body: Center(
-            child: Text('This is news'),
+            child: Post('d', 'd', 'd'),
           ),
     );
   }
